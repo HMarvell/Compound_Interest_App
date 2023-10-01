@@ -1,0 +1,134 @@
+
+import customtkinter
+
+customtkinter.set_appearance_mode("system")
+customtkinter.set_default_color_theme("dark-blue")
+
+root = customtkinter.CTk()
+root.title ("Compound Interest Calculator")
+root.geometry("750x500")
+
+font = customtkinter.CTkFont(family='MS Sans Serif', size=12)
+frame = customtkinter.CTkFrame(master=root)
+frame.pack(pady=20, padx=60, fill="both", expand=True)
+label = customtkinter.CTkLabel(master=frame, text="Compound interest calculator for assisting with pension estimations", font=("MS Sans Serif", 12))
+label.pack(pady=12, padx=10)
+global current_var
+global perc_var
+global period_var
+global years_var
+global cont_var
+current_var = customtkinter.DoubleVar()
+perc_var = customtkinter.DoubleVar()
+period_var = customtkinter.DoubleVar()
+years_var = customtkinter.DoubleVar()
+cont_var = customtkinter.DoubleVar()
+
+
+def createVariables():
+  
+    current_var = entry1.get()
+    perc_var = entry2.get()
+    period_var = entry3.get()
+    years_var = entry4.get()
+    cont_var = entry5.get()
+    print("The Pot is : " + current_var)
+    print("The Expected % Return is : " + perc_var)
+    print("The Period Interest is paid is : " + period_var)
+    print("The Time Till Retirenment is : " + years_var)
+    print("The Monthly Contributions are : " + cont_var)
+
+
+    for widgets in customtkinter.CTkFrame.winfo_children(frame):
+        widgets.destroy()
+
+    outputConfirmation = customtkinter.CTkLabel(master=frame, text = "To Confirm:")
+    outputConfirmation.pack(pady=12, padx=10)
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "The Current Value of the pot is: " + current_var)
+    outputCurrentVar.pack()
+
+    outputPercVar = customtkinter.CTkLabel(master=frame, text = "The Expected % Return is : " + perc_var)
+    outputPercVar.pack()
+
+    outputPeriodVar = customtkinter.CTkLabel(master=frame, text = "The Period Interest is paid is : " + period_var)
+    outputPeriodVar.pack()
+
+    outputYearsVar = customtkinter.CTkLabel(master=frame, text = "The Time Till Retirenment is : " + years_var)
+    outputYearsVar.pack()
+
+    outputContVar = customtkinter.CTkLabel(master=frame, text = "The Monthly Contributions are : " + cont_var)
+    outputContVar.pack()
+    
+    button = customtkinter.CTkButton(master=frame, text="Calculate", command=calcVariables)
+    button.pack(pady=12, padx=10)
+
+
+
+def calcVariables():
+    current_var = customtkinter.DoubleVar()
+    perc_var = customtkinter.DoubleVar()
+    period_var = customtkinter.IntVar()
+    years_var = customtkinter.IntVar()
+    cont_var = customtkinter.DoubleVar()
+    current_var2 = current_var.get()
+    perc_var2 = period_var.get()
+    period_var2 = period_var.get()
+    years_var2 = years_var.get()
+    cont_var2 = cont_var.get()
+    perc = perc_var.get()
+    period = period_var.get()
+
+    
+    
+    interestperiod = (1 + (perc/period))
+    topower = (period_var2 * years_var2)
+    interestplusprincipal = current_var2 * (interestperiod**topower)
+    oneplus = (1+(perc_var2/period_var2))
+    topower2 = ((period_var2*years_var2))
+    periodrate = period_var2/period_var2
+    halfdone = (((oneplus**topower2)-1)/periodrate)
+    futurevaluewithdeposits = cont_var2*halfdone
+    totalamount = interestplusprincipal + futurevaluewithdeposits
+    lump = f"{current_var2:,.2f}"
+    cont = f"{cont_var2:,.2f}"
+    total2 = f"{totalamount:,.2f}"
+    
+    outputConfirmation = customtkinter.CTkLabel(master=frame, text = "Your Expected Pension")
+    outputConfirmation.pack(pady=12, padx=10)
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "Given a lump sum of £ "+lump)
+    outputCurrentVar.pack()
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "With monthly additional contributions of £"+cont)
+    outputCurrentVar.pack()
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "Over"+years_var2 + "years")
+    outputCurrentVar.pack()
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "Expecting an annual return of "+perc_var2)
+    outputCurrentVar.pack()
+
+    outputCurrentVar = customtkinter.CTkLabel(master=frame, text = "Your expected pension value will be £"+total2)
+    outputCurrentVar.pack()
+
+entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Current Pot Value / Lump sum")
+entry1.pack(pady=12, padx=10)
+
+entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Annual % Return")
+entry2.pack(pady=12, padx=10)
+
+entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Interest Period")
+entry3.pack(pady=12, padx=10)
+
+entry4 = customtkinter.CTkEntry(master=frame, placeholder_text="Years till Retirement")
+entry4.pack(pady=12, padx=10)
+
+entry5 = customtkinter.CTkEntry(master=frame, placeholder_text="Additional Monthly Contributions")
+entry5.pack(pady=12, padx=10)
+
+button = customtkinter.CTkButton(master=frame, text="Calculate", command=createVariables)
+button.pack(pady=12, padx=10)
+
+
+root.mainloop()
