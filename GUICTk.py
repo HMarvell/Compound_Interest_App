@@ -1,5 +1,7 @@
 import customtkinter as ctk
 from tkinter import messagebox
+ctk.set_appearance_mode("system")
+ctk.set_default_color_theme("dark-blue")
 
 def confirm_values():
     confirmation_message = f"""Confirm Input Values:
@@ -50,10 +52,12 @@ def calculate_compound_interest():
 
 # Create application
 app = ctk.CTk()
+app.title ("Compound Interest Calculator")
+app.geometry("400x450")
 
 # Create a frame for window
 main_frame = ctk.CTkFrame(app)
-main_frame.pack(padx=20, pady=20)
+main_frame.pack(padx=30, pady=30)
 
 # Create entry fields
 current_value_label = ctk.CTkLabel(main_frame, text="Current Pension Value:")
