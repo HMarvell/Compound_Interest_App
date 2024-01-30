@@ -48,8 +48,12 @@ def calculate_compound_interest():
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical values.")
 
-# Create main application window
+# Create application
 app = ctk.CTk()
+
+# Create a frame for window
+main_frame = ctk.CTkFrame(app)
+main_frame.pack(padx=20, pady=20)
 
 # Create entry fields
 current_value_label = ctk.CTkLabel(app, text="Current Pension Value:")
@@ -77,7 +81,7 @@ additional_contributions_label.grid(row=4, column=0)
 additional_contributions_entry = ctk.CTkEntry(app)
 additional_contributions_entry.grid(row=4, column=1)
 
-# Store input widgets for easier management
+# Store input widgets
 input_widgets = [
     current_value_label, current_value_entry,
     annual_return_label, annual_return_entry,
