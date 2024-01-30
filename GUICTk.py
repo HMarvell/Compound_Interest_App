@@ -24,11 +24,11 @@ def calculate_compound_interest():
 
         # Calculations
         interest_period_calc = (1 + annual_return / interest_period)
-        topower = (interest_period * years_till_retire)
+        topower = (interest_period * years_to_retire)
         interest_plus_principal = current_value * (interest_period_calc ** topower)
 
         oneplus = (1 + (annual_return / interest_period))
-        topower2 = (interest_period * years_till_retire)
+        topower2 = (interest_period * years_to_retire)
         period_rate = annual_return / interest_period
         halfdone = (((oneplus ** topower2) - 1) / period_rate)
         future_value_with_deposits = additional_contributions * halfdone
@@ -37,13 +37,13 @@ def calculate_compound_interest():
 
         # Hide input fields and confirmation button
         for widget in input_widgets:
-            widget.grid_remove()
+            widget.pack_forget()
 
-        confirm_button.grid_remove()
+        confirm_button.pack_forget()
 
         # Display result
         total_amount_label.configure(text=f"Expected pension amount: £{total_amount:,.2f}")
-        total_amount_label.grid(row=5, column=0, columnspan=2)
+        total_amount_label.pack()
 
     except ValueError:
         messagebox.showerror("Error", "Please enter valid numerical values.")
@@ -56,30 +56,30 @@ main_frame = ctk.CTkFrame(app)
 main_frame.pack(padx=20, pady=20)
 
 # Create entry fields
-current_value_label = ctk.CTkLabel(app, text="Current Pension Value:")
-current_value_label.grid(row=0, column=0)
-current_value_entry = ctk.CTkEntry(app)
-current_value_entry.grid(row=0, column=1)
+current_value_label = ctk.CTkLabel(main_frame, text="Current Pension Value:")
+current_value_label.pack()
+current_value_entry = ctk.CTkEntry(main_frame)
+current_value_entry.pack()
 
-annual_return_label = ctk.CTkLabel(app, text="Annual Return (%):")
-annual_return_label.grid(row=1, column=0)
-annual_return_entry = ctk.CTkEntry(app)
-annual_return_entry.grid(row=1, column=1)
+annual_return_label = ctk.CTkLabel(main_frame, text="Annual Return (%):")
+annual_return_label.pack()
+annual_return_entry = ctk.CTkEntry(main_frame)
+annual_return_entry.pack()
 
-interest_period_label = ctk.CTkLabel(app, text="Interest Payments (Per Year):")
-interest_period_label.grid(row=2, column=0)
-interest_period_entry = ctk.CTkEntry(app)
-interest_period_entry.grid(row=2, column=1)
+interest_period_label = ctk.CTkLabel(main_frame, text="Interest Payments (Per Year):")
+interest_period_label.pack()
+interest_period_entry = ctk.CTkEntry(main_frame)
+interest_period_entry.pack()
 
-years_to_retire_label = ctk.CTkLabel(app, text="Years Until Retirement:")
-years_to_retire_label.grid(row=3, column=0)
-years_to_retire_entry = ctk.CTkEntry(app)
-years_to_retire_entry.grid(row=3, column=1)
+years_to_retire_label = ctk.CTkLabel(main_frame, text="Years Until Retirement:")
+years_to_retire_label.pack()
+years_to_retire_entry = ctk.CTkEntry(main_frame)
+years_to_retire_entry.pack()
 
-additional_contributions_label = ctk.CTkLabel(app, text="Additional Monthly Contributions:")
-additional_contributions_label.grid(row=4, column=0)
-additional_contributions_entry = ctk.CTkEntry(app)
-additional_contributions_entry.grid(row=4, column=1)
+additional_contributions_label = ctk.CTkLabel(main_frame, text="Additional Monthly Contributions:")
+additional_contributions_label.pack()
+additional_contributions_entry = ctk.CTkEntry(main_frame)
+additional_contributions_entry.pack()
 
 # Store input widgets
 input_widgets = [
@@ -91,11 +91,11 @@ input_widgets = [
 ]
 
 # Create 'Confirm' button
-confirm_button = ctk.CTkButton(app, text="Confirm", command=confirm_values)
-confirm_button.grid(row=5, column=0, columnspan=2)
+confirm_button = ctk.CTkButton(main_frame, text="Confirm", command=confirm_values)
+confirm_button.pack(pady=20)
 
 # Result label
-total_amount_label = ctk.CTkLabel(app, text="")
-# total_amount_label.grid(row=6, column=0, columnspan=2)
+total_amount_label = ctk.CTkLabel(main_frame, text="")
+# total_amount_label.pack()
 
 app.mainloop()
