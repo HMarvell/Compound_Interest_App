@@ -44,7 +44,7 @@ def calculate_compound_interest():
         confirm_button.pack_forget()
 
         # Display result
-        total_amount_label.configure(text=f"Expected pension amount: £{total_amount:,.2f}")
+        total_amount_label.configure(text=f"Your Expected Pension Amount Will Be: £{total_amount:,.2f}")
         total_amount_label.pack()
 
     except ValueError:
